@@ -18,7 +18,10 @@ HEADER	=	philo.h
 DIR_SRC	=	./srcs
 SRCS	=	$(DIR_SRC)/main.c	\
 			$(DIR_SRC)/time.c	\
-			$(DIR_SRC)/thread.c
+			$(DIR_SRC)/parse.c	\
+			$(DIR_SRC)/brexit.c	\
+			$(DIR_SRC)/thread.c	\
+			$(DIR_SRC)/message.c
 
 
 #	Objets

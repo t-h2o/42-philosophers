@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   brexit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 23:08:06 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/04 23:08:11 by nasackers        ###   ########.fr       */
+/*   Created: 2022/04/05 00:46:29 by nasackers         #+#    #+#             */
+/*   Updated: 2022/04/05 00:46:31 by nasackers        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
-int	main(int argc, char **argv)
+static void
+	print_msg(char *s)
 {
-	struct timeval  start;
-	int				times[6];
-
-	parse_args(argc, argv, times);
-	thread();
-	time_start(&start);
-	time_now(&start);
-	return (0);
+	if (s == 0)
+		return ;
+	while (*s)
+	{
+		write(2, s, 1);
+		s++;
+	}
+	write(2, "\n", 1);
 }
-//	init philo
-//	init supervasor
-//	start time
-//	start simulation
 
+void
+	error_exit(char *s, int value)
+{
+	print_msg(s);
+	exit(value);
+}
