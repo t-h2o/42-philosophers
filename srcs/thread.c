@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:08:31 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/04 23:08:34 by nasackers        ###   ########.fr       */
+/*   Updated: 2022/04/13 18:23:12 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void
 	msg_philo("unblock", 250);
 	pthread_mutex_unlock((pthread_mutex_t *)arg);
 	usleep(1000);
-
 	return (0);
 }
 
@@ -33,25 +32,23 @@ static void
 
 	
 	pthread_mutex_init(&mutex, 0);
-
 	pthread_create(&philosopher, 0, display_number, &mutex); 
-
 	printf("parent block\n");
 	pthread_mutex_lock(&mutex);
 	usleep(1000);
-
 	printf("parent unblock\n");
 	pthread_mutex_unlock(&mutex);
 	usleep(1000);
 }
 
-void
-	mutex_init(void)
-{
 
-//       int pthread_mutex_init(pthread_mutex_t *restrict mutex,
-//           const pthread_mutexattr_t *restrict attr);
-}
+//static void
+//	mutex_init(void)
+//{
+//
+////       int pthread_mutex_init(pthread_mutex_t *restrict mutex,
+////           const pthread_mutexattr_t *restrict attr);
+//}
 	
 void
 	thread(void)

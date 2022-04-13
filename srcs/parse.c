@@ -6,12 +6,13 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:46:40 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/05 00:46:41 by nasackers        ###   ########.fr       */
+/*   Updated: 2022/04/08 14:00:49 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+//	Transform number (sting) in number (integer)
 static int
 	str_int(char *s)
 {
@@ -28,8 +29,11 @@ static int
 	return (n);
 }
 
+//	Check the good number of arguments
+//	Check if the arguments are only digits
+//	Put the number value in array number times
 void
-	parse_args(int argc, char **argv, int times[6])
+	parse_args(int argc, char **argv, int times[5])
 {
 	int	i;
 

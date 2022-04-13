@@ -6,18 +6,20 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:15:04 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/05 11:38:09 by nasackers        ###   ########.fr       */
+/*   Updated: 2022/04/08 13:38:27 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
-void
+//	Print a number
+static void
 	putnbr(int n)
 {
+	char	c;
+
 	if (n < 0)
 		return ;
-	char	c;
 	if (n > 10)
 	{
 		putnbr(n / 10);
@@ -30,6 +32,7 @@ void
 	}
 }
 
+// Print a string
 static void
 	print_str(char *s)
 {
@@ -42,6 +45,7 @@ static void
 	}
 }
 
+//	Create a tabulation
 static void
 	tabulation(int n)
 {
@@ -52,6 +56,8 @@ static void
 	else
 		write(1, "   ", 3);
 }
+
+//	Display a message from a philosopher
 void
 	msg_philo(char *msg, int id)
 {

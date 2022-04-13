@@ -54,8 +54,8 @@ fclean: clean
 re:	fclean all
 
 norm:
-	norminette $(SRCS)
-	norminette $(HEADER)
+	clear
+	@(norminette ${DIR_INC}${HEADER} ${SRCS} | grep -v  OK\!) || true
 
 lldb:
 	gcc $(SRCS) -I $(DIR_INC) -g -o $(NAME)
