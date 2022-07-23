@@ -4,14 +4,15 @@ NAME	=	philo
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-CLIB	=	-lpthread
+CLIB	=	-lpthread -L libft -lft
 #OFLAGS	=	-fsanitize=address
 
 
 #	Headers
 
 DIR_INC	=	./headers/
-HEADER	=	philo.h
+HEADER	+=	philo.h
+HEADER	+=	libft.h
 
 
 #	Sources
@@ -38,6 +39,7 @@ vpath %.c $(DIR_SRC)
 all : $(NAME)
 
 $(NAME):	$(OBJS)
+	make -C libft/ --silent
 	$(CC) $(OFLAGS) $(OBJS) $(CLIB) -o $(NAME)
 
 $(DIR_OBJ)/%.o : %.c | $(DIR_OBJ)
@@ -47,9 +49,11 @@ $(DIR_OBJ) :
 	@mkdir -p $(DIR_OBJ)
 
 clean:
+	make -C libft/ clean --silent
 	$(RM) $(DIR_OBJ)
 
 fclean: clean
+	make -C libft/ fclean --silent
 	$(RM) $(NAME)
 
 re:	fclean all

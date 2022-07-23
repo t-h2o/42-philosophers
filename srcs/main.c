@@ -6,11 +6,12 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:08:06 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/08 14:08:28 by theo             ###   ########.fr       */
+/*   Updated: 2022/07/23 17:18:31 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
+#include	"libft.h"
 
 //		MAIN
 //	1. parse arguments
