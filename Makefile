@@ -4,6 +4,7 @@ NAME	=	philo
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
+CLIB	=	-lpthread
 #OFLAGS	=	-fsanitize=address
 
 
@@ -37,7 +38,7 @@ vpath %.c $(DIR_SRC)
 all : $(NAME)
 
 $(NAME):	$(OBJS)
-	$(CC) $(OFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(OFLAGS) $(OBJS) $(CLIB) -o $(NAME)
 
 $(DIR_OBJ)/%.o : %.c | $(DIR_OBJ)
 	$(CC) $(CFLAGS) -I $(DIR_INC) -o $@ -c $^
