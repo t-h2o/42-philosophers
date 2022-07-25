@@ -6,31 +6,11 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:15:04 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/08 13:38:27 by theo             ###   ########.fr       */
+/*   Updated: 2022/07/25 20:42:18 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
-
-//	Print a number
-static void
-	putnbr(int n)
-{
-	char	c;
-
-	if (n < 0)
-		return ;
-	if (n > 10)
-	{
-		putnbr(n / 10);
-		putnbr(n % 10);
-	}
-	else if (10 > n)
-	{
-		c = n + '0';
-		write(1, &c, 1);
-	}
-}
 
 // Print a string
 static void
@@ -63,7 +43,7 @@ void
 {
 	write(1, "philo", 5);
 	tabulation(id);
-	putnbr(id);
+	ft_putnbr_fd(id, 1);
 	write(1, " : ", 3);
 	print_str(msg);
 	write(1, "\n", 1);

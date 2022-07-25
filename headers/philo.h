@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/08 14:00:33 by theo             ###   ########.fr       */
+/*   Updated: 2022/07/25 20:40:55 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include	<sys/time.h>
 # include	<unistd.h>
 # include	<pthread.h>
+# include	"libft.h"
 
 //	TIME
 
