@@ -25,9 +25,11 @@ test_philo () {
 	printf "# %s\n" "$1"
 	printf "./philo %s\n" "$2"
 
-	if ! ./philo $2
+	./philo $2
+
+	if [ $? -eq 0 ]
 	then
-		print "OK!"
+		printf "OK!"
 
 	else
 		printf "KO :/"
@@ -46,12 +48,14 @@ test_error () {
 	printf "# %s\n" "$1"
 	printf "./philo %s\n" "$2"
 
-	if ./philo $2
+	./philo $2
+
+	if [ $? -ne 0 ]
 	then
-		print "OK!"
+		printf "OK!\n"
 
 	else
-		printf "KO :/"
+		printf "KO :/\n"
 		exit 1
 
 	fi
@@ -65,8 +69,8 @@ test_usage () {
 
 	printf "###Test bad usage\n"
 
-	test_philo "not enought arguments" "500 400 200"
-	test_philo "too much arguments" "12 500 400 200 42 50"
+	test_error "not enought arguments" "500 400 200"
+	test_error "too much arguments" "12 500 400 200 42 50"
 
 }
 
@@ -88,4 +92,4 @@ main () {
 
 }
 
-main
+main 
