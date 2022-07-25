@@ -1,0 +1,20 @@
+---
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tagged-release:
+    name: "Test application"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: build application
+        run: make
+      - name: test application
+        run: ./test.sh
