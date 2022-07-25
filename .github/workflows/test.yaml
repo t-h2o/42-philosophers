@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  tagged-release:
+  tagged-test:
     name: "Test application"
     runs-on: ubuntu-latest
 
