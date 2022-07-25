@@ -16,3 +16,10 @@ jobs:
         uses: actions/checkout@v2
       - name: build application
         run: make
+      - name: Create release
+        uses: "mozilla/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          files: |
+            philo
