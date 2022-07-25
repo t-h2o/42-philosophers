@@ -11,7 +11,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-
 ### ARGUMENTS LIST
 # number_of_philosophers
 # time_to_die
@@ -25,27 +24,63 @@ test_philo () {
 
 	printf "# %s\n" "$1"
 	printf "./philo %s\n" "$2"
-	./philo $2
+
+	if ! ./philo $2
+	then
+		print "OK!"
+
+	else
+		printf "KO :/"
+		exit 1
+
+	fi
+
 	echo
 
 }
 
+# 1. Comment
+# 2. Argument
+test_error () {
+
+	printf "# %s\n" "$1"
+	printf "./philo %s\n" "$2"
+
+	if ./philo $2
+	then
+		print "OK!"
+
+	else
+		printf "KO :/"
+		exit 1
+
+	fi
+
+	echo
+
+}
+
+# Test bad usage
 test_usage () {
 
 	printf "###Test bad usage\n"
+
 	test_philo "not enought arguments" "500 400 200"
 	test_philo "too much arguments" "12 500 400 200 42 50"
 
 }
 
+# Test normal usage
 test_normal () {
 
 	printf "###Test normal usage\n"
+
 	test_philo "number of times each philosopher must eat" "12 500 400 200 42"
 	test_philo "infinity" "12 500 400 200"
 
 }
 
+# Main
 main () {
 
 	test_usage
