@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:08:06 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/23 17:18:31 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/26 23:02:35 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 //	(times[4])	: number of times each philosopher must eat
 int	main(int argc, char **argv)
 {
-	struct timeval  start;
+	struct timeval	start;
 	int				times[5];
 
 	parse_args(argc, argv, times);
 
 	for (int i = 0; i < 6; i++)
 		printf("times %d\n", times[i]);
-	
+
 	thread();
 	time_start(&start);
 	time_now(&start);

@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:08:31 by nasackers         #+#    #+#             */
-/*   Updated: 2022/04/13 18:23:12 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/26 23:04:19 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static void
 	thread_create(void)
 {
 	pthread_t		philosopher;
-	pthread_mutex_t mutex;
+	pthread_mutex_t	mutex;
 
-	
 	pthread_mutex_init(&mutex, 0);
-	pthread_create(&philosopher, 0, display_number, &mutex); 
+	pthread_create(&philosopher, 0, display_number, &mutex);
 	printf("parent block\n");
 	pthread_mutex_lock(&mutex);
 	usleep(1000);
@@ -41,7 +40,6 @@ static void
 	usleep(1000);
 }
 
-
 //static void
 //	mutex_init(void)
 //{
@@ -49,7 +47,7 @@ static void
 ////       int pthread_mutex_init(pthread_mutex_t *restrict mutex,
 ////           const pthread_mutexattr_t *restrict attr);
 //}
-	
+
 void
 	thread(void)
 {
