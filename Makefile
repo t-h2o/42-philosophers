@@ -3,7 +3,15 @@
 NAME	=	philo
 
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+DB		=	lldb
+
+CFLAGS	=	-Wall
+CFLAGS	+=	-Wextra
+CFLAGS	+=	-Werror
+CFLAGS	+=	-g
+
+OFLAGS	=	-fsanitize=address
+
 CLIB	=	-lpthread -L libft -lft
 #OFLAGS	=	-fsanitize=address
 
@@ -65,7 +73,5 @@ norm:
 	clear
 	@(norminette $(INCS) $(SRCS) | grep -v  OK\!) || true
 
-lldb:
-	gcc $(SRCS) -I $(INCD) -g -o $(NAME)
-	lldb $(NAME)
-
+db: all
+	${DB} $(NAME)
