@@ -90,3 +90,4 @@ main () {
 }
 
 main 
+echo TEST SUCCESS
