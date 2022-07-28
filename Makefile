@@ -28,6 +28,7 @@ INCS	=	$(INCD)/philo.h
 SRCD	=	./srcs
 
 SRCS	=	$(SRCD)/main.c
+SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/utils_str.c
 
 

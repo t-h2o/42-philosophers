@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/28 16:22:38 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/28 16:28:46 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 // UTILS STRINGS
 
 void	putstr_fd(char *str, int fd);
+void	print_error(char *msg);
 
 #endif	/*	PHILO_H	*/
