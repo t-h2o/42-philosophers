@@ -6,11 +6,39 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:13:54 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/28 16:59:13 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/28 17:26:05 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
+
+// Convert a string into an integer
+static int	strint(char *str)
+{
+	int	n;
+
+	if (str == 0)
+		return (-1);
+	n = 0;
+	while (*str)
+	{
+		n = (*str - '0') + 10 * n;
+		++str;
+	}
+	return (n);
+}
+
+// Fill table of number from the arguments
+static void	fill_tab(char **args, int infos[5])
+{
+	int	i;
+
+	i = 5;
+	while (i--)
+	{
+		infos[i] = strint(args[i]);
+	}
+}
 
 // Check if all string are digits
 static int	check_number(char **args)
@@ -32,7 +60,7 @@ static int	check_number(char **args)
 	return (0);
 }
 
-int	parsing(int argc, char **argv)
+int	parsing(int argc, char **argv, int infos[5])
 {
 	if (argc < 5 || 6 < argc)
 	{
@@ -42,5 +70,6 @@ int	parsing(int argc, char **argv)
 	++argv;
 	if (check_number(argv))
 		return (1);
+	fill_tab(argv, infos);
 	return (0);
 }
