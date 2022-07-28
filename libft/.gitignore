@@ -1,7 +1,0 @@
-libftTester
-*.o
-program
-*.a
-.DS_Store
-.*.swp
-a.out
