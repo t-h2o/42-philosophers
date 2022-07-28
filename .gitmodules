@@ -1,0 +1,3 @@
+[submodule "42-libft"]
+	path = 42-libft
+	url = https://github.com/t-h2o/42-libft

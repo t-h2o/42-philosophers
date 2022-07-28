@@ -4,6 +4,7 @@ NAME	=	philo
 
 CC		=	gcc
 DB		=	lldb
+LIBFTD	=	42-libft
 
 CFLAGS	=	-Wall
 CFLAGS	+=	-Wextra
@@ -12,7 +13,7 @@ CFLAGS	+=	-g
 
 OFLAGS	=	-fsanitize=address
 
-CLIB	=	-lpthread -L libft -lft
+CLIB	=	-lpthread -L $(LIBFTD) -lft
 #OFLAGS	=	-fsanitize=address
 
 
@@ -49,7 +50,7 @@ vpath %.c $(SRCD)
 all : $(NAME)
 
 $(NAME):	$(OBJS)
-	make -C libft/ --silent
+	make -C $(LIBFTD)/ --silent
 	$(CC) $(OFLAGS) $(OBJS) $(CLIB) -o $(NAME)
 
 $(OBJD)/%.o : %.c | $(OBJD)
@@ -59,11 +60,11 @@ $(OBJD) :
 	@mkdir -p $(OBJD)
 
 clean:
-	make -C libft/ clean --silent
+	make -C $(LIBFTD)/ clean --silent
 	$(RM) $(OBJD)
 
 fclean: clean
-	make -C libft/ fclean --silent
+	make -C $(LIBFTD)/ fclean --silent
 	$(RM) $(NAME)
 
 re:	fclean all
