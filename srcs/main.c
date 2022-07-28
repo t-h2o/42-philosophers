@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:55:23 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/28 16:45:18 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/28 17:13:26 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 // ?times[4] : number of times each philosopher must eat
 int	main(int argc, char **argv)
 {
-	(void)argv;
 	putstr_fd("philo\n", 1);
-	if (parsing(argc))
+	if (parsing(argc, argv))
 		return (1);
 }

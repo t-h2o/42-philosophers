@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/28 16:39:54 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/28 16:53:40 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 // PARSING
 
-int		parsing(int argc);
+int		parsing(int argc, char **argv);
 
 // UTILS STRINGS
 
