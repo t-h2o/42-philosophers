@@ -29,6 +29,7 @@ SRCD	=	./srcs
 
 SRCS	=	$(SRCD)/main.c
 SRCS	+=	$(SRCD)/error.c
+SRCS	+=	$(SRCD)/parsing.c
 SRCS	+=	$(SRCD)/utils_str.c
 
 
