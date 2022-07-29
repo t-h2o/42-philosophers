@@ -21,6 +21,13 @@
 # include	<unistd.h>
 # include	<pthread.h>
 
+// STRUCTURE
+
+typedef struct s_philo {
+	pthread_t	philo;
+	int			number;
+}	t_philo;
+
 // PHILOS
 
 int		init_philo(int nphilo);
