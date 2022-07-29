@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/29 15:11:13 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 17:26:34 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ typedef struct s_philo {
 	pthread_t		philo;
 	pthread_mutex_t	*locker;
 	int				number;
+	int				*infos;
 }	t_philo;
 
 // PHILOS
 
-int		init_philo(int nphilo, t_philo **philos);
+int		init_philo(int infos[5], t_philo **philos);
 int		start_philo(int nphilo, t_philo *philos);
 
 // PARSING
