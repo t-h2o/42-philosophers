@@ -33,4 +33,5 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_philo(infos[0]))
 		return (2);
+	return (0);
 }
