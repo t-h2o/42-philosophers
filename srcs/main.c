@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:55:23 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/29 15:53:45 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 19:11:48 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,20 @@ int	main(int argc, char **argv)
 	t_philo	*philos;
 	int		infos[5];
 
-	void	*a = 0;
-	if (a)
-		pthread_mutex_destroy(a);
 	putstr_fd("philo\n", 1);
 	philos = 0;
 	if (parsing(argc, argv, infos))
 		return (1);
 	if (init_philo(infos, &philos))
 	{
-		free(philos);
+		free_destroy(philos, philos->locker);
 		return (2);
 	}
 	if (start_philo(infos[0], philos))
 	{
-		free(philos);
+		free_destroy(philos, philos->locker);
 		return (3);
 	}
-	pthread_mutex_destroy(philos->locker);
-	free(philos->locker);
-	free(philos);
+	free_destroy(philos, philos->locker);
 	return (0);
 }
