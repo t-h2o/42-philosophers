@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/29 14:29:24 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 14:49:00 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int	init_philo(int nphilo, t_philo **philos)
 	i = -1;
 	while (++i < nphilo)
 	{
-		pthread_create(&(((*philos)[i]).philo), 0, &life, &((*philos)[i]));
+		if (pthread_create(&(((*philos)[i]).philo), 0, &life, &((*philos)[i])))
+		{
+			print_error("Error: Philo: System: pthread_join\n");
+			return (1);
+		}
 		((*philos)[i]).number = i + 1;
 	}
 	return (0);
