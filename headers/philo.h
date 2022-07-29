@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/28 17:27:03 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 12:58:44 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include	<sys/time.h>
 # include	<unistd.h>
 # include	<pthread.h>
+
+// PHILOS
+
+int		init_philo(int nphilo);
 
 // PARSING
 
