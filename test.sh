@@ -25,9 +25,7 @@ test_philo () {
 	printf "# %s\n" "$1"
 	printf "./philo %s\n" "$2"
 
-	./philo $2
-
-	if [ $? -eq 0 ]
+	if ./philo $2;
 	then
 		printf "OK!\n"
 
@@ -46,9 +44,7 @@ test_error () {
 	printf "# %s\n" "$1"
 	printf "./philo %s\n" "$2"
 
-	./philo $2
-
-	if [ $? -ne 0 ]
+	if ! ./philo $2;
 	then
 		printf "OK!\n"
 
@@ -63,29 +59,47 @@ test_error () {
 # Test bad usage
 test_usage () {
 
-	printf "###Test bad usage\n"
+	printf "### Test bad usage\n"
 
 	test_error "not enought arguments" "500 400 200"
 	test_error "too much arguments" "12 500 400 200 42 50"
 	test_error "not number" "abc 500 400 200 42"
+	test_error "negative number" "12 500 -400 200 42"
 
 }
 
 # Test normal usage
 test_normal () {
 
-	printf "###Test normal usage\n"
+	printf "### Test normal usage\n"
 
 	test_philo "number of times each philosopher must eat" "12 500 400 200 42"
 	test_philo "infinity" "12 500 400 200"
 
 }
 
+file_norm () {
+
+	printf "### Norminette\n"
+
+	if norminette ./ > /dev/null;
+	then
+		printf "OK!\n"
+
+	else
+		printf "KO :/\n"
+		exit 1
+	fi
+
+}
+
 # Main
 main () {
 
+	make re
 	test_usage
 	test_normal
+	file_norm
 
 }
 
