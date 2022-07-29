@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/29 14:29:45 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 15:11:13 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 // STRUCTURE
 
 typedef struct s_philo {
-	pthread_t	philo;
-	int			number;
+	pthread_t		philo;
+	pthread_mutex_t	*locker;
+	int				number;
 }	t_philo;
 
 // PHILOS
