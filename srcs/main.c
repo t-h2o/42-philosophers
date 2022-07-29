@@ -29,6 +29,9 @@ int	main(int argc, char **argv)
 	t_philo	*philos;
 	int		infos[5];
 
+	void	*a = 0;
+	if (a)
+		pthread_mutex_destroy(a);
 	putstr_fd("philo\n", 1);
 	philos = 0;
 	if (parsing(argc, argv, infos))
@@ -43,6 +46,7 @@ int	main(int argc, char **argv)
 		free(philos);
 		return (3);
 	}
+	pthread_mutex_destroy(philos->locker);
 	free(philos->locker);
 	free(philos);
 	return (0);
