@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/07/29 13:59:29 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/07/29 14:29:45 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_philo {
 
 // PHILOS
 
-int		init_philo(int nphilo);
+int		init_philo(int nphilo, t_philo **philos);
+int		start_philo(int nphilo, t_philo *philos);
 
 // PARSING
 

@@ -31,6 +31,7 @@ SRCS	=	$(SRCD)/main.c
 SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/init_philo.c
 SRCS	+=	$(SRCD)/parsing.c
+SRCS	+=	$(SRCD)/start_philo.c
 SRCS	+=	$(SRCD)/utils_str.c
 
 
