@@ -18,6 +18,17 @@
 # time_to_sleep
 # [number_of_times_each_philosopher_must_eat]
 
+# 1. message
+msg_green () {
+	printf '\e[0;32m%s\n\e[0m' "$1"
+}
+
+# 1. message
+msg_red () {
+
+	printf '\e[0;31m%s\n\e[0m' "$1"
+}
+
 # 1. Comment
 # 2. Argument
 test_philo () {
@@ -27,10 +38,10 @@ test_philo () {
 
 	if ./philo $2;
 	then
-		printf "OK!\n"
+		msg_green "Test philo: OK!"
 
 	else
-		printf "KO :/\n"
+		msg_red "Test philo: KO :/"
 		exit 1
 
 	fi; echo
@@ -46,10 +57,10 @@ test_error () {
 
 	if ! ./philo $2;
 	then
-		printf "OK!\n"
+		msg_green "Test error: OK!"
 
 	else
-		printf "KO :/\n"
+		msg_red "Test error: KO :/"
 		exit 1
 
 	fi; echo
@@ -84,10 +95,10 @@ file_norm () {
 
 	if norminette ./ > /dev/null;
 	then
-		printf "OK!\n"
+		msg_green "Norminette: OK!"
 
 	else
-		printf "KO :/\n"
+		msg_red "Norminette: KO :/"
 		exit 1
 	fi
 
@@ -100,8 +111,9 @@ main () {
 	test_usage
 	test_normal
 	file_norm
+	msg_green
 
 }
 
 main 
-echo TEST SUCCESS
+msg_green "TEST SUCCESS"
