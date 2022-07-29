@@ -10,7 +10,15 @@ CFLAGS	+=	-Wextra
 CFLAGS	+=	-Werror
 CFLAGS	+=	-g
 
-OFLAGS	=	-fsanitize=address
+# Selection fsanitize
+
+## Thread
+CFLAGS	+=	-fsanitize=thread
+OFLAGS	=	-fsanitize=thread
+
+## Address
+#OFLAGS	=	-fsanitize=address
+
 
 CLIB	=	-lpthread
 #OFLAGS	=	-fsanitize=address
