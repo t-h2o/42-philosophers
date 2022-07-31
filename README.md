@@ -1,5 +1,17 @@
 # 42-philosophers
 
+```draw
+P: Philosopher
+F: Fork
+
+Table:
+P1 F1 P2 F2 P3 F3
+
+P1 need F3 and F1
+P2 need F1 and F2
+P3 need F2 and F3
+```
+
 ## Informations
 
 ### Difference between processes and threads
