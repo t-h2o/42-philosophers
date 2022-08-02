@@ -104,10 +104,21 @@ file_norm () {
 
 }
 
+makere () {
+
+	if make re;
+	then
+		msg_green "Compilation OK!"
+	else
+		exit 1
+		msg_red "Error of compilation"
+	fi
+
+}
 # Main
 main () {
 
-	make re
+	makere
 	test_usage
 	test_normal
 	file_norm
