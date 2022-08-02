@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:55:23 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/29 15:14:35 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/01 00:46:57 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,22 @@
 int	main(int argc, char **argv)
 {
 	t_philo	*philos;
-	int		infos[5];
+	t_info	info;
 
 	putstr_fd("philo\n", 1);
 	philos = 0;
-	if (parsing(argc, argv, infos))
+	if (parsing(argc, argv, info.args))
 		return (1);
-	if (init_philo(infos[0], &philos))
+	if (init_philo(info, &philos))
 	{
 		free(philos);
 		return (2);
 	}
-	if (start_philo(infos[0], philos))
+	if (start_philo(info.args[0], philos))
 	{
 		free(philos);
 		return (3);
 	}
-	free(philos->locker);
 	free(philos);
 	return (0);
 }
