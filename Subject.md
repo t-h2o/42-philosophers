@@ -159,10 +159,10 @@ les philosophes ont mangé au moinsnumber_of_times_each_philosopher_must_eat
 fois, la simulation prend fin. Si cet argument n’est pas spécifié, alors la simu-
 lation prend fin à la mort d’un philosophe.
 ```
-- Chaque philosophe se voit assigner un numéro entre 1 etnumber_of_philosophers.
+- Chaque philosophe se voit assigner un numéro entre 1 et number_of_philosophers.
 - Le philosophe numéro 1 est assis à côté du philosophe numéronumber_of_philosophers.
-    Les autres suivent cette logique : philosophe numéroNest assis entre philosophe
-    numéroN- 1 et philosophe numéroN+ 1.
+    Les autres suivent cette logique : philosophe numéro N est assis entre philosophe
+    numéro N-1 et philosophe numéro N+1.
 
 
 Philosophers Qui aurait cru que philosopher serait si mortel?
