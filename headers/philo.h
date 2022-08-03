@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/03 13:08:35 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:20:11 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 // ?[4] : number of times each philosopher must eat
 // start:
 typedef struct s_info {
-	int	args[5];
-	int	start;
+	int				args[5];
+	struct timeval	start;
 }	t_info;
 
 // left fork
@@ -59,6 +59,11 @@ int		end_philo(int nphilo, t_philo *philos);
 // PARSING
 
 int		parsing(int argc, char **argv, int infos[5]);
+
+// TIME
+
+void	time_start(struct timeval *start);
+int		time_now(struct timeval *start);
 
 // UTILS STRINGS
 
