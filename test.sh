@@ -84,8 +84,7 @@ test_normal () {
 
 	printf "### Test normal usage\n"
 
-	test_philo "number of times each philosopher must eat" "12 500 400 200 42"
-	test_philo "infinity" "12 500 400 200"
+	test_philo "number of times each philosopher must eat" "5 500 400 200 4"
 
 }
 
