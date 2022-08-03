@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/03 13:20:11 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:51:45 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ typedef struct s_philo {
 
 // MESSAGE
 
-void	eat(t_philo *philo);
+void	p_eat(t_philo *philo);
+void	p_sleep(t_philo *philo);
+void	p_think(t_philo *philo);
 
 // PHILOS
 

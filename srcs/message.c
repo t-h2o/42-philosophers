@@ -6,16 +6,11 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 13:23:18 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:52:07 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
-
-// timestamp_in_ms X is eating
-// lock
-// eat
-// unlock
 
 static void	msg_philo(int nphilo, char *msg, struct timeval *start)
 {
@@ -25,7 +20,12 @@ static void	msg_philo(int nphilo, char *msg, struct timeval *start)
 	putstr_fd(msg, 1);
 }
 
-void	eat(t_philo *philo)
+// lock
+// timestamp_in_ms X has taken a fork
+// timestamp_in_ms X is eating
+// eat
+// unlock
+void	p_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mine);
 	pthread_mutex_lock(philo->left);
@@ -37,6 +37,17 @@ void	eat(t_philo *philo)
 }
 
 // timestamp_in_ms X is sleeping
-// timestamp_in_ms X has taken a fork
+void	p_sleep(t_philo *philo)
+{
+	msg_philo(philo->number, " is eating\n", &(philo->info->start));
+	usleep(philo->info->args[3] * 1000);
+}
+
 // timestamp_in_ms X is thinking
+void	p_think(t_philo *philo)
+{
+	msg_philo(philo->number, " is thinking\n", &(philo->info->start));
+	usleep(philo->info->args[3] * 1000);
+}
+
 // timestamp_in_ms X died
