@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/03 14:02:59 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/04 00:08:04 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ typedef struct s_philo {
 	int				number;
 	t_info			*info;
 }	t_philo;
+
+// BREXIT
+
+void	free_destroy(t_info *info, t_philo *philo);
 
 // MESSAGE
 

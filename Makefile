@@ -36,6 +36,7 @@ INCS	=	$(INCD)/philo.h
 SRCD	=	./srcs
 
 SRCS	=	$(SRCD)/main.c
+SRCS	+=	$(SRCD)/brexit.c
 SRCS	+=	$(SRCD)/end_philo.c
 SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/message.c

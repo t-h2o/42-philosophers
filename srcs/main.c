@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:55:23 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 13:29:30 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/04 00:09:38 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	main(int argc, char **argv)
 		free(philos);
 		return (3);
 	}
-	free(philos);
+	free_destroy(&info, philos);
 	return (0);
 }
