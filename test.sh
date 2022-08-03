@@ -92,7 +92,7 @@ file_norm () {
 
 	printf "### Norminette\n"
 
-	if make norm > /dev/null;
+	if norminette headers srcs > /dev/null;
 	then
 		msg_green "Norminette: OK!"
 
@@ -114,12 +114,47 @@ makere () {
 	fi
 
 }
-# Main
-main () {
 
+# fsanitize Thread
+test_thread () {
+
+	printf "### FSANITIZE=thread\n"
+
+	export FSANITIZE=thread
+	makere
+	test_normal
+
+}
+
+# fsanitize Address
+test_address () {
+
+	printf "### FSANITIZE=address\n"
+
+	export FSANITIZE=address
+	makere
+	test_normal
+
+}
+
+# NO fsanitize
+void () {
+
+	printf "### NO FSANITIZE\n"
+
+	export FSANITIZE=void
 	makere
 	test_usage
 	test_normal
+
+}
+
+# Main
+main () {
+
+	void
+	test_thread
+	test_address
 	file_norm
 	msg_green
 

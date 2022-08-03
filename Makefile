@@ -12,12 +12,16 @@ CFLAGS	+=	-g
 
 # Selection fsanitize
 
-## Thread
-CFLAGS	+=	-fsanitize=thread
-OFLAGS	=	-fsanitize=thread
+## thread
+ifeq (${FSANITIZE},thread)
+	CFLAGS	+=	-fsanitize=thread
+	OFLAGS	=	-fsanitize=thread
+endif
 
-## Address
-#OFLAGS	=	-fsanitize=address
+## address
+ifeq (${FSANITIZE},address)
+	OFLAGS	=	-fsanitize=address
+endif
 
 
 CLIB	=	-lpthread
