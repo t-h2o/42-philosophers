@@ -6,22 +6,23 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/01 00:45:01 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:10:33 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+// Nothing
+// while (1)
+//   eat
+//   sleep
+//   think
 static void	*life(void *arg)
 {
 	t_philo	*me;
 
 	me = arg;
-	pthread_mutex_lock(me->mine);
-	sleep(1);
-	putnbr_fd(me->number, 1);
-	putstr_fd(": I'm alive\n", 1);
-	pthread_mutex_unlock(me->mine);
+	eat(me);
 	return (0);
 }
 
@@ -40,26 +41,40 @@ static pthread_mutex_t	*crt_mutex(void)
 	return (locker);
 }
 
-int	init_philo(t_info info, t_philo **philos)
+static int	init_philo(t_info *info, t_philo **philos)
 {
-	int				i;
-	pthread_mutex_t	*locker;
+	int	i;
 
-	locker = crt_mutex();
-	if (locker == 0)
-		return (2);
-	pthread_mutex_init(locker, 0);
-	*philos = malloc(sizeof(t_philo) * info.args[0]);
+	*philos = malloc(sizeof(t_philo) * info->args[0]);
 	if (*philos == 0)
 	{
 		print_error("Error: Philo: System: Malloc return 0\n");
 		return (2);
 	}
 	i = -1;
-	while (++i < info.args[0])
+	while (++i < info->args[0])
 	{
 		((*philos)[i]).number = i + 1;
-		((*philos)[i]).mine = locker;
+		((*philos)[i]).info = info;
+		((*philos)[i]).mine = crt_mutex();
+		if (((*philos)[i]).mine == 0)
+			return (2);
+		if (i != 0)
+			((*philos)[i]).left = ((*philos)[i - 1]).mine;
+	}
+	((*philos)[0]).left = ((*philos)[i - 1]).mine;
+	return (0);
+}
+
+int	start_philo(t_info *info, t_philo **philos)
+{
+	int	i;
+
+	if (init_philo(info, philos))
+		return (2);
+	i = -1;
+	while (++i < info->args[0])
+	{
 		if (pthread_create(&(((*philos)[i]).philo), 0, &life, &((*philos)[i])))
 		{
 			print_error("Error: Philo: System: pthread_join\n");

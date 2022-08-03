@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_philo.c                                      :+:      :+:    :+:   */
+/*   end_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 14:16:56 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/29 14:47:26 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:11:08 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
-int	start_philo(int nphilo, t_philo *philos)
+int	end_philo(int nphilo, t_philo *philos)
 {
 	int	i;
 
