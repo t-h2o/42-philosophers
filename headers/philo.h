@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/03 14:02:59 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 14:21:54 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_philo {
 	pthread_t		philo;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*mine;
-	int				*start;
 	int				number;
+	int				last_eat;
 	t_info			*info;
 }	t_philo;
 

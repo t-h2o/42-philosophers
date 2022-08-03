@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 14:10:18 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 14:23:31 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	*life(void *arg)
 	t_philo	*me;
 
 	me = arg;
+	me->last_eat = time_now(&(me->info->start));
 	p_eat(me);
 	p_sleep(me);
 	p_think(me);

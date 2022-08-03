@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 14:14:01 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 14:39:49 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,14 @@ void	p_eat(t_philo *philo)
 // timestamp_in_ms X is sleeping
 void	p_sleep(t_philo *philo)
 {
+	int	begin;
+	int	now;
+
 	msg_philo(philo->number, " is sleeping\n", philo->info);
-	usleep(philo->info->args[3] * 1000);
+	begin = time_now(&(philo->info->start));
+	now = 0;
+	while (now < begin + philo->info->args[3])
+		now = time_now(&(philo->info->start));
 }
 
 // timestamp_in_ms X is thinking
