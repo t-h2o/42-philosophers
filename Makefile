@@ -41,6 +41,7 @@ SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/init_philo.c
 SRCS	+=	$(SRCD)/message.c
 SRCS	+=	$(SRCD)/parsing.c
+SRCS	+=	$(SRCD)/time.c
 SRCS	+=	$(SRCD)/utils_str.c
 
 

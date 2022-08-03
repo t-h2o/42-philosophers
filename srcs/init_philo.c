@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 13:10:33 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 13:17:05 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	start_philo(t_info *info, t_philo **philos)
 
 	if (init_philo(info, philos))
 		return (2);
+	time_start(&(info->start));
 	i = -1;
 	while (++i < info->args[0])
 	{
