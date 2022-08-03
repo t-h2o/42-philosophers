@@ -93,7 +93,7 @@ file_norm () {
 
 	printf "### Norminette\n"
 
-	if norminette ./ > /dev/null;
+	if make norm > /dev/null;
 	then
 		msg_green "Norminette: OK!"
 
