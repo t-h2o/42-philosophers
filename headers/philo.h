@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/03 13:51:45 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 14:02:59 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 typedef struct s_info {
 	int				args[5];
 	struct timeval	start;
+	pthread_mutex_t	*print_msg;
 }	t_info;
 
 // left fork
