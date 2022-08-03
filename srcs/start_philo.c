@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 14:23:31 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/03 14:52:55 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void	*life(void *arg)
 
 	me = arg;
 	me->last_eat = time_now(&(me->info->start));
+	p_eat(me);
+	p_sleep(me);
+	p_think(me);
 	p_eat(me);
 	p_sleep(me);
 	p_think(me);
@@ -58,6 +61,7 @@ static int	init_philo(t_info *info, t_philo **philos)
 	while (++i < info->args[0])
 	{
 		((*philos)[i]).number = i + 1;
+		((*philos)[i]).died = 0;
 		((*philos)[i]).info = info;
 		((*philos)[i]).mine = crt_mutex();
 		if (((*philos)[i]).mine == 0)
