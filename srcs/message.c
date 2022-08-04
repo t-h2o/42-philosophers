@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 01:40:36 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/04 02:00:19 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	p_sleep(t_philo *philo)
 void	p_think(t_philo *philo)
 {
 	msg_philo(" is thinking\n", philo, time_now(&(philo->info->start)));
-	usleep(philo->info->args[3] * 1000);
 }
 
 // timestamp_in_ms X died
