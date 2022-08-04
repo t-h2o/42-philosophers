@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 01:55:45 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/04 13:29:46 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	*life(void *arg)
 	t_philo	*me;
 
 	me = arg;
-	if (me->number % 2 == 0)
-		usleep(100);
 	p_eat(me);
 	p_sleep(me);
 	p_think(me);

@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 02:04:33 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/04 13:47:33 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,20 @@ static void	msg_philo(char *msg, t_philo *philo, int time)
 // unlock
 void	p_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->mine);
-	msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
-	pthread_mutex_lock(philo->left);
-	msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+	if (philo->number % 2 == 1)
+	{
+		pthread_mutex_lock(philo->mine);
+		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		pthread_mutex_lock(philo->left);
+		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+	}
+	else
+	{
+		pthread_mutex_lock(philo->left);
+		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		pthread_mutex_lock(philo->mine);
+		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+	}
 	msg_philo(" is eating\n", philo, time_now(&(philo->info->start)));
 	usleep(philo->info->args[2] * 1000);
 	pthread_mutex_unlock(philo->mine);
