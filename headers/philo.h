@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/04 00:08:04 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/05 15:43:48 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		parsing(int argc, char **argv, int infos[5]);
 
 void	time_start(struct timeval *start);
 int		time_now(struct timeval *start);
+void	my_sleep(t_philo *philo, int time);
 
 // UTILS STRINGS
 

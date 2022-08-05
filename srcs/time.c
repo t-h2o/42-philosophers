@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:27:57 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 13:29:08 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/05 15:43:05 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,19 @@ int
 	now = (unsigned int)(((time.tv_sec - start->tv_sec) * 1000) \
 		+ ((time.tv_usec - start->tv_usec) / 1000));
 	return ((int)now);
+}
+
+void
+	my_sleep(t_philo *philo, int time)
+{
+	int	begin;
+	int	now;
+
+	begin = time_now(&(philo->info->start));
+	now = begin;
+	while (now - begin < time)
+	{
+		usleep(100);
+		now = time_now(&(philo->info->start));
+	}
 }
