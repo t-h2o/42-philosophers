@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 13:47:33 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/05 15:03:35 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static void	msg_philo(char *msg, t_philo *philo, int time)
 // unlock
 void	p_eat(t_philo *philo)
 {
+	int	begin;
+	int	now;
+
 	if (philo->number % 2 == 1)
 	{
 		pthread_mutex_lock(philo->mine);
@@ -44,7 +47,10 @@ void	p_eat(t_philo *philo)
 		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
 	}
 	msg_philo(" is eating\n", philo, time_now(&(philo->info->start)));
-	usleep(philo->info->args[2] * 1000);
+	begin = time_now(&(philo->info->start));
+	now = begin;
+	while (now - begin < philo->info->args[2])
+		now = time_now(&(philo->info->start));
 	pthread_mutex_unlock(philo->mine);
 	pthread_mutex_unlock(philo->left);
 }
