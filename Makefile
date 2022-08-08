@@ -41,6 +41,7 @@ SRCD	=	./srcs
 
 SRCS	=	$(SRCD)/main.c
 SRCS	+=	$(SRCD)/brexit.c
+SRCS	+=	$(SRCD)/eat.c
 SRCS	+=	$(SRCD)/end_philo.c
 SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/life.c

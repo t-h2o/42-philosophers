@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/08 16:23:12 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:37:08 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_destroy(t_info *info, t_philo *philo);
 
 // LIFE
 
+void	msg_philo(char *msg, t_philo *philo, int time);
 int		p_eat(t_philo *philo);
 int		p_sleep(t_philo *philo);
 void	p_think(t_philo *philo);
