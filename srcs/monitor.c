@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:23:45 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/08 20:37:19 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,27 @@ static void	msg_philo_died(char *msg, t_philo *philo, int time)
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 
+static int	check_dead(t_philo *philo)
+{
+	int		now;
+
+	pthread_mutex_lock(philo->info->print_msg);
+	now = time_now(&(philo->info->start));
+	if (now - philo->last_eat > philo->info->args[1])
+	{
+		pthread_mutex_unlock(philo->info->print_msg);
+		msg_philo_died(" is died\n", philo, now);
+		return (1);
+	}
+	else
+		pthread_mutex_unlock(philo->info->print_msg);
+	return (0);
+
+}
 static void	*monitor_dead(void *args)
 {
 	t_philo	*philos;
 	int		i;
-	int		now;
 	int		nphilos;
 
 	philos = args;
@@ -50,16 +66,10 @@ static void	*monitor_dead(void *args)
 		i = -1;
 		while (++i < nphilos)
 		{
-			pthread_mutex_lock(philos->info->print_msg);
-			now = time_now(&(philos->info->start));
-			if (now - (philos[i]).last_eat > philos->info->args[1])
+			if (check_dead(&(philos[i])))
 			{
-				pthread_mutex_unlock(philos->info->print_msg);
-				msg_philo_died(" is died\n", &(philos[i]), now);
 				return (0);
 			}
-			else
-				pthread_mutex_unlock(philos->info->print_msg);
 		}
 		usleep(100);
 	}
