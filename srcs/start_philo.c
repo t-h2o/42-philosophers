@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/08 23:47:32 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/09 00:29:39 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ static int	init_philo(t_info *info, t_philo **philos)
 		if (i != 0)
 			((*philos)[i]).left = ((*philos)[i - 1]).mine;
 	}
-	((*philos)[0]).left = ((*philos)[i - 1]).mine;
+	if (i == 1)
+		((*philos)[0]).left = 0;
+	else
+		((*philos)[0]).left = ((*philos)[i - 1]).mine;
 	return (0);
 }
 

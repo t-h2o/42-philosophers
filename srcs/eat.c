@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:34:41 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/09 00:31:04 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	lock_fork(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->mine);
 		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
-		if (ifdead(philo))
+		if (ifdead(philo) || philo->left == 0)
 			return (unlock(philo->mine, 0));
 		pthread_mutex_lock(philo->left);
 		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
