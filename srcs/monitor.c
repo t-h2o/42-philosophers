@@ -6,21 +6,11 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/08 20:37:19 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/09 00:09:41 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
-
-static int	get_n_philos(t_philo *philo)
-{
-	int	ret;
-
-	pthread_mutex_lock(philo->info->print_msg);
-	ret = philo->info->args[0];
-	pthread_mutex_unlock(philo->info->print_msg);
-	return (ret);
-}
 
 static void	msg_philo_died(char *msg, t_philo *philo, int time)
 {
@@ -36,41 +26,56 @@ static void	msg_philo_died(char *msg, t_philo *philo, int time)
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 
-static int	check_dead(t_philo *philo)
+static int	check_dead(t_philo *philos)
 {
-	int		now;
+	int	now;
+	int	i;
 
-	pthread_mutex_lock(philo->info->print_msg);
-	now = time_now(&(philo->info->start));
-	if (now - philo->last_eat > philo->info->args[1])
+	pthread_mutex_lock(philos->info->print_msg);
+	i = -1;
+	while (++i < philos[0].info->args[0])
 	{
-		pthread_mutex_unlock(philo->info->print_msg);
-		msg_philo_died(" is died\n", philo, now);
-		return (1);
+		now = time_now(&(philos[i].info->start));
+		if (now - philos[i].last_eat > philos[i].info->args[1])
+		{
+			pthread_mutex_unlock(philos[i].info->print_msg);
+			msg_philo_died(" is died\n", &(philos[i]), now);
+			return (1);
+		}
 	}
-	else
-		pthread_mutex_unlock(philo->info->print_msg);
+	pthread_mutex_unlock(philos->info->print_msg);
 	return (0);
-
 }
-static void	*monitor_dead(void *args)
+
+static int	check_finish(t_philo *philos)
+{
+	int		i;
+
+	i = -1;
+	pthread_mutex_lock(philos->info->print_msg);
+	while (++i < philos->info->args[0])
+	{
+		if (philos[i].count != -1 && philos[i].count > 0)
+		{
+			pthread_mutex_unlock(philos->info->print_msg);
+			return (0);
+		}
+	}
+	pthread_mutex_unlock(philos->info->print_msg);
+	return (1);
+}
+
+static void	*monitor_thread(void *args)
 {
 	t_philo	*philos;
-	int		i;
-	int		nphilos;
 
 	philos = args;
-	nphilos = get_n_philos(philos);
 	while (1)
 	{
-		i = -1;
-		while (++i < nphilos)
-		{
-			if (check_dead(&(philos[i])))
-			{
-				return (0);
-			}
-		}
+		if (check_dead(philos))
+			return (0);
+		if (check_finish(philos))
+			return (0);
 		usleep(100);
 	}
 	return (0);
@@ -79,7 +84,7 @@ static void	*monitor_dead(void *args)
 int	monitor(t_philo *philos, t_info *info)
 {
 	pthread_mutex_lock(info->print_msg);
-	if (pthread_create(&(info->monitor[0]), 0, &monitor_dead, philos))
+	if (pthread_create(&(info->monitor[0]), 0, &monitor_thread, philos))
 	{
 		print_error("Error: Philo: System: pthread_join\n");
 		pthread_mutex_unlock(info->print_msg);
