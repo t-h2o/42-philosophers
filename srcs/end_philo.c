@@ -6,13 +6,13 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 14:16:56 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/03 13:11:08 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/08 16:24:01 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
-int	end_philo(int nphilo, t_philo *philos)
+int	end_philo(int nphilo, t_philo *philos, t_info *info)
 {
 	int	i;
 
@@ -24,6 +24,11 @@ int	end_philo(int nphilo, t_philo *philos)
 			print_error("Error: Philo: System: pthread_join\n");
 			return (1);
 		}
+	}
+	if (pthread_join(info->monitor[0], 0))
+	{
+		print_error("Error: Philo: System: pthread_join\n");
+		return (1);
 	}
 	return (0);
 }

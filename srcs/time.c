@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:27:57 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/05 15:43:05 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/07 23:00:59 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ void
 	time_start(struct timeval *start)
 {
 	gettimeofday(start, 0);
+}
+
+int	ifdead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->info->print_msg);
+	if (philo->info->died == 1)
+	{
+		pthread_mutex_unlock(philo->info->print_msg);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->info->print_msg);
+	return (0);
 }
 
 //	return current time [ms]
@@ -44,5 +56,7 @@ void
 	{
 		usleep(100);
 		now = time_now(&(philo->info->start));
+		if (ifdead(philo))
+			return ;
 	}
 }

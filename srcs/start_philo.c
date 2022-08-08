@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 13:29:46 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/08 13:41:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ static void	*life(void *arg)
 	t_philo	*me;
 
 	me = arg;
-	p_eat(me);
-	p_sleep(me);
-	p_think(me);
+	while (1)
+	{
+		if (p_eat(me))
+			return (0);
+		p_sleep(me);
+		p_think(me);
+	}
 	return (0);
 }
 
@@ -57,6 +61,7 @@ static int	init_philo(t_info *info, t_philo **philos)
 	while (++i < info->args[0])
 	{
 		((*philos)[i]).number = i + 1;
+		((*philos)[i]).last_eat = 0;
 		((*philos)[i]).info = info;
 		((*philos)[i]).mine = crt_mutex();
 		if (((*philos)[i]).mine == 0)
@@ -78,6 +83,7 @@ int	start_philo(t_info *info, t_philo **philos)
 	if (info->print_msg == 0)
 		return (2);
 	time_start(&(info->start));
+	info->died = 0;
 	i = -1;
 	while (++i < info->args[0])
 	{
@@ -87,5 +93,6 @@ int	start_philo(t_info *info, t_philo **philos)
 			return (1);
 		}
 	}
+	monitor(*philos, info);
 	return (0);
 }

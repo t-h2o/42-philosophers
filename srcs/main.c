@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:55:23 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/04 16:51:41 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/08 13:37:58 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 		free(philos);
 		return (2);
 	}
-	if (end_philo(info.args[0], philos))
+	if (end_philo(info.args[0], philos, &info))
 	{
 		free(philos);
 		return (3);

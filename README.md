@@ -28,6 +28,28 @@ t4: p2 think
 t4: P3 spleep
 ```
 
+### What a life
+
+The main loop:
+
+1. lock the two forks
+2. eat
+   1. lock message
+   2. write the message
+   3. unlock message
+   4. wait the eat time
+3. unlock the two forks
+4. sleep
+   1. lock message
+   2. write the message
+   3. unlock message
+   4. wait the sleep time
+5. think
+   1. lock message
+   2. write the message
+   3. unlock message
+   4. wait available fork
+
 ## Informations
 
 ### Difference between processes and threads

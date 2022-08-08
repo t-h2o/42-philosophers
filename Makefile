@@ -44,6 +44,7 @@ SRCS	+=	$(SRCD)/brexit.c
 SRCS	+=	$(SRCD)/end_philo.c
 SRCS	+=	$(SRCD)/error.c
 SRCS	+=	$(SRCD)/life.c
+SRCS	+=	$(SRCD)/monitor.c
 SRCS	+=	$(SRCD)/parsing.c
 SRCS	+=	$(SRCD)/start_philo.c
 SRCS	+=	$(SRCD)/time.c
