@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/08 17:36:35 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/09 00:38:36 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,29 @@ void	msg_philo(char *msg, t_philo *philo, int time)
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 
-// timestamp_in_ms X is sleeping
-int	p_sleep(t_philo *philo)
+// Nothing
+// while (1)
+//   eat
+//   sleep
+//   think
+void	*life(void *arg)
 {
-	int	begin;
-	int	now;
+	t_philo	*me;
+	int		i;
 
-	begin = time_now(&(philo->info->start));
-	now = begin;
-	msg_philo(" is sleeping\n", philo, begin);
-	while (now - begin < philo->info->args[3])
+	me = arg;
+	i = me->count;
+	while (i == -1 || i--)
 	{
-		usleep(100);
-		now = time_now(&(philo->info->start));
-		if (ifdead(philo))
+		if (p_eat(me))
 			return (0);
+		p_sleep(me);
+		p_think(me);
 	}
+	pthread_mutex_lock(me->info->print_msg);
+	me->count = 0;
+	pthread_mutex_unlock(me->info->print_msg);
 	return (0);
-}
-
-// timestamp_in_ms X is thinking
-void	p_think(t_philo *philo)
-{
-	msg_philo(" is thinking\n", philo, time_now(&(philo->info->start)));
 }
 
 // timestamp_in_ms X died

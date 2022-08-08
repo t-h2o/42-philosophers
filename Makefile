@@ -49,6 +49,8 @@ SRCS	+=	$(SRCD)/monitor.c
 SRCS	+=	$(SRCD)/parsing.c
 SRCS	+=	$(SRCD)/start_philo.c
 SRCS	+=	$(SRCD)/time.c
+SRCS	+=	$(SRCD)/think.c
+SRCS	+=	$(SRCD)/sleep.c
 SRCS	+=	$(SRCD)/utils_str.c
 
 

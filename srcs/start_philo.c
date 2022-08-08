@@ -6,36 +6,11 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/09 00:29:39 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/09 00:38:36 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
-
-// Nothing
-// while (1)
-//   eat
-//   sleep
-//   think
-static void	*life(void *arg)
-{
-	t_philo	*me;
-	int		i;
-
-	me = arg;
-	i = me->count;
-	while (i == -1 || i--)
-	{
-		if (p_eat(me))
-			return (0);
-		p_sleep(me);
-		p_think(me);
-	}
-	pthread_mutex_lock(me->info->print_msg);
-	me->count = 0;
-	pthread_mutex_unlock(me->info->print_msg);
-	return (0);
-}
 
 // Create a mutex
 static pthread_mutex_t	*crt_mutex(void)
