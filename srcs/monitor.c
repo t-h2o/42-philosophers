@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/09 10:04:14 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/09 10:44:51 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ static int	check_finish(t_philo *philos)
 	int		i;
 
 	i = -1;
-	pthread_mutex_lock(philos->info->print_msg);
 	while (++i < philos->info->args[0])
 	{
+		pthread_mutex_lock(philos->info->print_msg);
 		if (philos[i].count != -1 && philos[i].count > 0)
 		{
 			pthread_mutex_unlock(philos->info->print_msg);
 			return (0);
 		}
+		pthread_mutex_unlock(philos->info->print_msg);
 	}
-	pthread_mutex_unlock(philos->info->print_msg);
 	return (1);
 }
 
