@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/09 00:38:36 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/09 09:47:04 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	start_philo(t_info *info, t_philo **philos)
 	info->print_msg = crt_mutex();
 	if (info->print_msg == 0)
 		return (2);
-	time_start(&(info->start));
 	info->died = 0;
 	i = -1;
+	time_start(&(info->start));
 	while (++i < info->args[0])
 	{
 		if (pthread_create(&(((*philos)[i]).philo), 0, &life, &((*philos)[i])))
