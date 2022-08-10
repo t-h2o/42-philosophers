@@ -6,12 +6,13 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/10 18:37:46 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/10 18:44:34 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+// Unlock the mutex a or/and b
 static int	unlock(pthread_mutex_t *a, pthread_mutex_t *b)
 {
 	if (a)
@@ -21,6 +22,14 @@ static int	unlock(pthread_mutex_t *a, pthread_mutex_t *b)
 	return (1);
 }
 
+// Lock the fork mine and left:
+// if the philosopher is odd
+//   1. mine
+//   2. left
+// if the philosopher is even
+//   1. left
+//   2. mine
+// With that, we avoid the deadlock !
 static int	lock_fork(t_philo *philo)
 {
 	if (philo->number % 2 == 1)
@@ -48,6 +57,11 @@ static int	lock_fork(t_philo *philo)
 	return (0);
 }
 
+// Philosopher eat
+// 1. Lock the mine and left forks
+// 2. Eat
+// 3. Wait the time's meal
+// 4. Unlock the both forks
 int	p_eat(t_philo *philo)
 {
 	int	now;
