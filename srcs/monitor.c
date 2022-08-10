@@ -6,12 +6,13 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/09 10:44:51 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/11 15:08:53 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+// Print a philopher message and set to 1 info.died
 static void	msg_philo_died(char *msg, t_philo *philo, int time)
 {
 	pthread_mutex_lock(philo->info->print_msg);
@@ -26,6 +27,7 @@ static void	msg_philo_died(char *msg, t_philo *philo, int time)
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 
+// Check if a philopher had died with last_eat time and the time now
 static int	check_dead(t_philo *philos)
 {
 	int	now;
@@ -47,6 +49,7 @@ static int	check_dead(t_philo *philos)
 	return (0);
 }
 
+// Check if all philopher had finished with a bool data
 static int	check_finish(t_philo *philos)
 {
 	int		i;
@@ -65,6 +68,9 @@ static int	check_finish(t_philo *philos)
 	return (1);
 }
 
+// Monitor:
+// 1. if a philospher had died
+// 2. if the simulation had finished
 static void	*monitor_thread(void *args)
 {
 	t_philo	*philos;
@@ -81,6 +87,7 @@ static void	*monitor_thread(void *args)
 	return (0);
 }
 
+// Start the thread monitor
 int	monitor(t_philo *philos, t_info *info)
 {
 	if (pthread_create(&(info->monitor[0]), 0, &monitor_thread, philos))
