@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/09 00:31:04 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/10 18:37:46 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	unlock(pthread_mutex_t *a, pthread_mutex_t *b)
 {
-	pthread_mutex_unlock(a);
+	if (a)
+		pthread_mutex_unlock(a);
 	if (b)
 		pthread_mutex_unlock(b);
 	return (1);
