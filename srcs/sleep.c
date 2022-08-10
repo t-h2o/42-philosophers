@@ -6,13 +6,15 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 00:37:36 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/09 00:37:57 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/10 18:47:10 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
 // timestamp_in_ms X is sleeping
+// 1. Sleep
+// 2. Wait the time's sleep
 int	p_sleep(t_philo *philo)
 {
 	int	begin;
