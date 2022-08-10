@@ -6,12 +6,16 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/09 00:38:36 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/10 18:49:43 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+// timestamp_in_ms X is eating
+// timestamp_in_ms X is sleeping
+// timestamp_in_ms X is thinking
+// timestamp_in_ms X died
 void	msg_philo(char *msg, t_philo *philo, int time)
 {
 	pthread_mutex_lock(philo->info->print_msg);
@@ -49,5 +53,3 @@ void	*life(void *arg)
 	pthread_mutex_unlock(me->info->print_msg);
 	return (0);
 }
-
-// timestamp_in_ms X died
