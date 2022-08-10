@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/09 09:47:04 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/10 18:04:40 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int	start_philo(t_info *info, t_philo **philos)
 	int	i;
 
 	if (init_philo(info, philos))
+		return (2);
+	info->data_died = crt_mutex();
+	if (info->data_died == 0)
 		return (2);
 	info->print_msg = crt_mutex();
 	if (info->print_msg == 0)
