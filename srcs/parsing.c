@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:13:54 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/07/28 17:26:05 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/11 15:11:09 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ static int	check_number(char **args)
 	return (0);
 }
 
+// Parsing
+// 1. Check the number of arguments (we need between 5-6 arguments)
+// 2. Check if arguments are numbers
+// 3. Transform string to integer
 int	parsing(int argc, char **argv, int infos[5])
 {
 	if (argc < 5 || 6 < argc)
