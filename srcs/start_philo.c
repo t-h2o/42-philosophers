@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/10 18:04:40 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/14 09:30:33 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int	start_philo(t_info *info, t_philo **philos)
 			print_error("Error: Philo: System: pthread_join\n");
 			return (1);
 		}
+		((*philos)[i]).data_philo = crt_mutex();
+		if (((*philos)[i]).data_philo == 0)
+			return (2);
 	}
 	monitor(*philos, info);
 	return (0);
