@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/11 15:08:53 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/14 09:34:11 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ static int	check_finish(t_philo *philos)
 	i = -1;
 	while (++i < philos->info->args[0])
 	{
-		pthread_mutex_lock(philos->info->print_msg);
+		pthread_mutex_lock(philos[i].data_philo);
 		if (philos[i].count != -1 && philos[i].count > 0)
 		{
-			pthread_mutex_unlock(philos->info->print_msg);
+			pthread_mutex_unlock(philos[i].data_philo);
 			return (0);
 		}
-		pthread_mutex_unlock(philos->info->print_msg);
+		if (philos[i].count != -1 && philos[i].count > 0)
+		pthread_mutex_unlock(philos[i].data_philo);
 	}
 	return (1);
 }
