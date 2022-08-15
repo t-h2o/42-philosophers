@@ -6,25 +6,33 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/14 09:34:11 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/15 14:28:03 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
 // Print a philopher message and set to 1 info.died
+// if one philospher has already died, do nothing
 static void	msg_philo_died(char *msg, t_philo *philo, int time)
 {
-	pthread_mutex_lock(philo->info->print_msg);
-	if (philo->info->died == 0)
+	pthread_mutex_lock(philo->info->data_died);
+	if (philo->info->died == 1)
 	{
+		pthread_mutex_unlock(philo->info->data_died);
+		return ;
+	}
+	else
+	{
+		philo->info->died = 1;
+		pthread_mutex_unlock(philo->info->data_died);
+		pthread_mutex_lock(philo->info->print_msg);
 		putnbr_fd(time, 1);
 		putstr_fd(" ", 1);
 		putnbr_fd(philo->number, 1);
 		putstr_fd(msg, 1);
-		philo->info->died = 1;
+		pthread_mutex_unlock(philo->info->print_msg);
 	}
-	pthread_mutex_unlock(philo->info->print_msg);
 }
 
 // Check if a philopher had died with last_eat time and the time now
