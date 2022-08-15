@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/15 16:24:58 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:47:58 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,24 @@ static int	check_dead(t_philo *philos)
 	int	now;
 	int	i;
 
-	pthread_mutex_lock(philos->info->print_msg);
 	i = -1;
 	while (++i < philos[0].info->args[0])
 	{
 		now = time_now(&(philos[i].info->start));
+		pthread_mutex_lock(philos[i].data_philo);
+
+//		pthread_mutex_lock(philos->info->print_msg);
+//		printf ("dead: %d\n", now - philos[i].last_eat > philos[i].info->args[1]);
+//		pthread_mutex_unlock(philos->info->print_msg);
+
 		if (now - philos[i].last_eat > philos[i].info->args[1])
 		{
-			pthread_mutex_unlock(philos[i].info->print_msg);
+			pthread_mutex_unlock(philos[i].data_philo);
 			msg_philo_died(" has died\n", &(philos[i]), now);
 			return (1);
 		}
+		pthread_mutex_unlock(philos[i].data_philo);
 	}
-	pthread_mutex_unlock(philos->info->print_msg);
 	return (0);
 }
 
@@ -65,8 +70,9 @@ static int	check_finish(t_philo *philos)
 	i = -1;
 	while (++i < philos->info->args[0])
 	{
+
 		pthread_mutex_lock(philos[i].data_philo);
-		if (philos[i].count != -1 && philos[i].count > 0)
+		if (philos[i].count == -1 || philos[i].count > 0)
 		{
 			pthread_mutex_unlock(philos[i].data_philo);
 			return (0);
@@ -74,17 +80,6 @@ static int	check_finish(t_philo *philos)
 		pthread_mutex_unlock(philos[i].data_philo);
 	}
 	return (1);
-}
-
-static void	genocide(t_philo *philos)
-{
-	int		i;
-
-	i = -1;
-	while (++i < philos->info->args[0])
-	{
-		pthread_detach(philos[i].philo);
-	}
 }
 
 // Monitor:
@@ -98,10 +93,7 @@ static void	*monitor_thread(void *args)
 	while (1)
 	{
 		if (check_dead(philos))
-		{
-			genocide(philos);
 			return (0);
-		}
 		if (check_finish(philos))
 			return (0);
 		usleep(100);

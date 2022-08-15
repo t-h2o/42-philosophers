@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/15 16:24:56 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:27:32 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,4 @@ void	*life(void *arg)
 	me->count = 0;
 	pthread_mutex_unlock(me->data_philo);
 	return (0);
-}
-
-void	*life_solo(void *args)
-{
-	printf("0 1 has taken a fork\n");
-	if (p_eat(me))
-		return (0);
-	msg_philo_died(" has died\n", &(philos[i]), now);
-
 }

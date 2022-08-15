@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/15 16:20:55 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:44:08 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int	p_eat(t_philo *philo)
 	if (lock_fork(philo))
 		return (1);
 	now = time_now(&(philo->info->start));
-	pthread_mutex_lock(philo->info->print_msg);
+	pthread_mutex_lock(philo->data_philo);
 	philo->last_eat = now;
+	pthread_mutex_unlock(philo->data_philo);
 	pthread_mutex_unlock(philo->info->print_msg);
 	msg_philo(" is eating\n", philo, now);
 	my_sleep(philo, philo->info->args[2]);
