@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/15 14:28:03 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/15 15:43:41 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	check_finish(t_philo *philos)
 			pthread_mutex_unlock(philos[i].data_philo);
 			return (0);
 		}
-		if (philos[i].count != -1 && philos[i].count > 0)
 		pthread_mutex_unlock(philos[i].data_philo);
 	}
 	return (1);

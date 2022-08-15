@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/10 18:49:43 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/15 15:44:11 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	*life(void *arg)
 		p_sleep(me);
 		p_think(me);
 	}
-	pthread_mutex_lock(me->info->print_msg);
+	pthread_mutex_lock(me->data_philo);
 	me->count = 0;
-	pthread_mutex_unlock(me->info->print_msg);
+	pthread_mutex_unlock(me->data_philo);
 	return (0);
 }
