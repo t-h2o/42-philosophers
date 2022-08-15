@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/10 18:44:34 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/15 16:20:55 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	lock_fork(t_philo *philo)
 	return (0);
 }
 
-// Philosopher eat
+// Philogtsopher eat
 // 1. Lock the mine and left forks
 // 2. Eat
 // 3. Wait the time's meal

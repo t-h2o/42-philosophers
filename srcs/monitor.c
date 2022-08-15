@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/15 15:43:41 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:24:58 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	check_dead(t_philo *philos)
 		if (now - philos[i].last_eat > philos[i].info->args[1])
 		{
 			pthread_mutex_unlock(philos[i].info->print_msg);
-			msg_philo_died(" is died\n", &(philos[i]), now);
+			msg_philo_died(" has died\n", &(philos[i]), now);
 			return (1);
 		}
 	}
@@ -76,6 +76,17 @@ static int	check_finish(t_philo *philos)
 	return (1);
 }
 
+static void	genocide(t_philo *philos)
+{
+	int		i;
+
+	i = -1;
+	while (++i < philos->info->args[0])
+	{
+		pthread_detach(philos[i].philo);
+	}
+}
+
 // Monitor:
 // 1. if a philospher had died
 // 2. if the simulation had finished
@@ -87,7 +98,10 @@ static void	*monitor_thread(void *args)
 	while (1)
 	{
 		if (check_dead(philos))
+		{
+			genocide(philos);
 			return (0);
+		}
 		if (check_finish(philos))
 			return (0);
 		usleep(100);
