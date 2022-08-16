@@ -52,7 +52,7 @@ void	print_animation(FILE *log, int nphilo)
 			line[philo][i[philo]++] = 'T';
 		if (strcmp(msg, "is eating") == 0)
 			line[philo][i[philo]++] = 'E';
-		if (strcmp(msg, "died") == 0)
+		if (strcmp(msg, "has died") == 0)
 			line[philo][i[philo]++] = 'D';
 	}
 	print_line(line, nphilo);

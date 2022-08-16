@@ -6,20 +6,30 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/09 00:31:04 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/15 16:44:08 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
 
+// Unlock the mutex a or/and b
 static int	unlock(pthread_mutex_t *a, pthread_mutex_t *b)
 {
-	pthread_mutex_unlock(a);
+	if (a)
+		pthread_mutex_unlock(a);
 	if (b)
 		pthread_mutex_unlock(b);
 	return (1);
 }
 
+// Lock the fork mine and left:
+// if the philosopher is odd
+//   1. mine
+//   2. left
+// if the philosopher is even
+//   1. left
+//   2. mine
+// With that, we avoid the deadlock !
 static int	lock_fork(t_philo *philo)
 {
 	if (philo->number % 2 == 1)
@@ -47,6 +57,11 @@ static int	lock_fork(t_philo *philo)
 	return (0);
 }
 
+// Philogtsopher eat
+// 1. Lock the mine and left forks
+// 2. Eat
+// 3. Wait the time's meal
+// 4. Unlock the both forks
 int	p_eat(t_philo *philo)
 {
 	int	now;
@@ -54,8 +69,9 @@ int	p_eat(t_philo *philo)
 	if (lock_fork(philo))
 		return (1);
 	now = time_now(&(philo->info->start));
-	pthread_mutex_lock(philo->info->print_msg);
+	pthread_mutex_lock(philo->data_philo);
 	philo->last_eat = now;
+	pthread_mutex_unlock(philo->data_philo);
 	pthread_mutex_unlock(philo->info->print_msg);
 	msg_philo(" is eating\n", philo, now);
 	my_sleep(philo, philo->info->args[2]);
