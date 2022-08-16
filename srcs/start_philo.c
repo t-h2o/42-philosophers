@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/15 16:37:49 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:50:16 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ static pthread_mutex_t	*crt_mutex(void)
 	return (locker);
 }
 
+static inline int	fill_philo(t_philo *philo, t_info *info, int i)
+{
+	philo->last_eat = 0;
+	philo->number = i + 1;
+	philo->info = info;
+	philo->count = info->args[4];
+	philo->mine = crt_mutex();
+	if (philo->mine == 0)
+		return (2);
+	philo->data_philo = crt_mutex();
+	if (philo->data_philo == 0)
+		return (2);
+	return (0);
+}
+
 static int	init_philo(t_info *info, t_philo **philos)
 {
 	int	i;
@@ -40,15 +55,7 @@ static int	init_philo(t_info *info, t_philo **philos)
 	i = -1;
 	while (++i < info->args[0])
 	{
-		((*philos)[i]).number = i + 1;
-		((*philos)[i]).last_eat = 0;
-		((*philos)[i]).info = info;
-		((*philos)[i]).count = info->args[4];
-		((*philos)[i]).mine = crt_mutex();
-		if (((*philos)[i]).mine == 0)
-			return (2);
-		((*philos)[i]).data_philo = crt_mutex();
-		if (((*philos)[i]).data_philo == 0)
+		if (fill_philo(&((*philos)[i]), info, i))
 			return (2);
 		if (i != 0)
 			((*philos)[i]).left = ((*philos)[i - 1]).mine;
