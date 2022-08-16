@@ -1,0 +1,130 @@
+diff --git a/headers/philo.h b/headers/philo.h
+index 889a442..92bca2a 100644
+--- a/headers/philo.h
++++ b/headers/philo.h
+@@ -6,7 +6,7 @@
+ /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
+-/*   Updated: 2022/08/14 09:24:39 by melogr@phy       ###   ########.fr       */
++/*   Updated: 2022/08/16 17:54:25 by tgrivel          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -30,6 +30,14 @@
+ //  [3] : time to sleep
+ // ?[4] : number of times each philosopher must eat
+ // start:
++enum args {
++	NB_PHILO,
++	T_TO_DIE,
++	T_TO_EAT,
++	T_TO_SLEEP,
++	MEALS
++};
++
+ typedef struct s_info {
+ 	pthread_t		monitor[2];
+ 	int				args[5];
+@@ -50,6 +58,7 @@ typedef struct s_philo {
+ 	int				number;
+ 	int				count;
+ 	int				last_eat;
++	int				starve;
+ 	t_info			*info;
+ }	t_philo;
+ 
+diff --git a/srcs/eat.c b/srcs/eat.c
+index 0d7a73e..38a9089 100644
+--- a/srcs/eat.c
++++ b/srcs/eat.c
+@@ -6,7 +6,7 @@
+ /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
+-/*   Updated: 2022/08/15 16:44:08 by tgrivel          ###   ########.fr       */
++/*   Updated: 2022/08/16 18:00:08 by tgrivel          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -71,6 +71,7 @@ int	p_eat(t_philo *philo)
+ 	now = time_now(&(philo->info->start));
+ 	pthread_mutex_lock(philo->data_philo);
+ 	philo->last_eat = now;
++	philo->starve = philo->last_eat + philo->info->args[1];
+ 	pthread_mutex_unlock(philo->data_philo);
+ 	pthread_mutex_unlock(philo->info->print_msg);
+ 	msg_philo(" is eating\n", philo, now);
+diff --git a/srcs/life.c b/srcs/life.c
+index 2da6c29..d5718ef 100644
+--- a/srcs/life.c
++++ b/srcs/life.c
+@@ -6,7 +6,7 @@
+ /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
+-/*   Updated: 2022/08/16 16:52:17 by tgrivel          ###   ########.fr       */
++/*   Updated: 2022/08/16 18:10:04 by tgrivel          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -18,17 +18,16 @@
+ // timestamp_in_ms X died
+ void	msg_philo(char *msg, t_philo *philo, int time)
+ {
++	pthread_mutex_lock(philo->info->print_msg);
+ 	pthread_mutex_lock(philo->info->data_died);
+ 	if (philo->info->died == 0)
+ 	{
+-		pthread_mutex_unlock(philo->info->data_died);
+-		pthread_mutex_lock(philo->info->print_msg);
+ 		putnbr_fd(time, 1);
+ 		putstr_fd(" ", 1);
+ 		putnbr_fd(philo->number, 1);
+ 		putstr_fd(msg, 1);
+-		pthread_mutex_unlock(philo->info->print_msg);
+ 	}
++	pthread_mutex_unlock(philo->info->print_msg);
+ 	pthread_mutex_unlock(philo->info->data_died);
+ }
+ 
+diff --git a/srcs/monitor.c b/srcs/monitor.c
+index 310b432..8a40d09 100644
+--- a/srcs/monitor.c
++++ b/srcs/monitor.c
+@@ -6,7 +6,7 @@
+ /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
+-/*   Updated: 2022/08/16 16:43:10 by tgrivel          ###   ########.fr       */
++/*   Updated: 2022/08/16 18:32:03 by tgrivel          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -26,13 +26,15 @@ static void	msg_philo_died(char *msg, t_philo *philo, int time)
+ 	{
+ 		philo->info->died = 1;
+ 		pthread_mutex_unlock(philo->info->data_died);
+-		pthread_mutex_lock(philo->info->print_msg);
+ 		putnbr_fd(time, 1);
+ 		putstr_fd(" ", 1);
+ 		putnbr_fd(philo->number, 1);
+ 		putstr_fd(msg, 1);
+-		pthread_mutex_unlock(philo->info->print_msg);
++		putstr_fd(" and starved at ", 1);
++		putnbr_fd(philo->starve, 1);
++		putstr_fd("\n", 1);
+ 	}
++	pthread_mutex_unlock(philo->info->print_msg);
+ }
+ 
+ // Check if a philopher had died with last_eat time and the time now
+@@ -46,7 +48,7 @@ static int	check_dead(t_philo *philos)
+ 	{
+ 		now = time_now(&(philos[i].info->start));
+ 		pthread_mutex_lock(philos[i].data_philo);
+-		if (now - philos[i].last_eat > philos[i].info->args[1])
++		if (now - philos[i].last_eat > philos[i].info->args[1] && philos[i].count != 0)
+ 		{
+ 			pthread_mutex_unlock(philos[i].data_philo);
+ 			msg_philo_died(" has died\n", &(philos[i]), now);

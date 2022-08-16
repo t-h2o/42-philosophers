@@ -67,3 +67,32 @@ Every threads share the same data.
 * CodeVault Videos: [Unix Threads in C](https://youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
 * Wikipedia: [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 * Wikipedia: [Philosopher](https://en.wikipedia.org/wiki/Philosopher)
+
+## TODO
+
+* kkk
+
+* Starved at (facultatif)
+
+* Checker le nombre de meal
+  ```
+  number_of_times_each_philosopher_must_eat (argument optionnel) : Si tous
+  les philosophes ont mangé au moins number_of_times_each_philosopher_must_eat
+  fois, la simulation prend fin. Si cet argument n’est pas spécifié, alors la simu-
+  lation prend fin à la mort d’un philosophe.
+  ```
+
+* Ne pas commencer a manger s'il est deja mort.
+
+* Ne pas commencer a manger s'il y a un autre philo qui est mort
+
+  example of what we don't want to see:
+  ```
+  410 take a fork
+  400 has died
+  ```
+
+1. prendre le stylo
+2. verifier si qqun est mort
+   mort -> poser le stylo
+   pas mort -> ecrire
