@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/14 09:24:39 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/16 17:54:25 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@
 //  [3] : time to sleep
 // ?[4] : number of times each philosopher must eat
 // start:
+enum args {
+	NB_PHILO,
+	T_TO_DIE,
+	T_TO_EAT,
+	T_TO_SLEEP,
+	MEALS
+};
+
 typedef struct s_info {
 	pthread_t		monitor[2];
 	int				args[5];
@@ -50,6 +58,7 @@ typedef struct s_philo {
 	int				number;
 	int				count;
 	int				last_eat;
+	int				starve;
 	t_info			*info;
 }	t_philo;
 

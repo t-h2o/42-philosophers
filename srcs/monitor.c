@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/16 16:43:10 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/16 18:32:03 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ static void	msg_philo_died(char *msg, t_philo *philo, int time)
 	{
 		philo->info->died = 1;
 		pthread_mutex_unlock(philo->info->data_died);
-		pthread_mutex_lock(philo->info->print_msg);
 		putnbr_fd(time, 1);
 		putstr_fd(" ", 1);
 		putnbr_fd(philo->number, 1);
 		putstr_fd(msg, 1);
-		pthread_mutex_unlock(philo->info->print_msg);
+		putstr_fd(" and starved at ", 1);
+		putnbr_fd(philo->starve, 1);
+		putstr_fd("\n", 1);
 	}
+	pthread_mutex_unlock(philo->info->print_msg);
 }
 
 // Check if a philopher had died with last_eat time and the time now
@@ -46,7 +48,7 @@ static int	check_dead(t_philo *philos)
 	{
 		now = time_now(&(philos[i].info->start));
 		pthread_mutex_lock(philos[i].data_philo);
-		if (now - philos[i].last_eat > philos[i].info->args[1])
+		if (now - philos[i].last_eat > philos[i].info->args[1] && philos[i].count != 0)
 		{
 			pthread_mutex_unlock(philos[i].data_philo);
 			msg_philo_died(" has died\n", &(philos[i]), now);
