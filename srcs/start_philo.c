@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:54:48 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/17 17:22:01 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 21:58:25 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,10 @@ static int	init_philo(t_info *info, t_philo **philos)
 	return (0);
 }
 
-int	start_philo(t_info *info, t_philo **philos)
+static int	create_thread(t_info *info, t_philo **philos)
 {
 	int	i;
 
-	if (init_philo(info, philos))
-		return (2);
-	info->data_died = crt_mutex();
-	if (info->data_died == 0)
-		return (2);
-	info->print_msg = crt_mutex();
-	if (info->print_msg == 0)
-		return (2);
-	info->died = 0;
-	time_start(&(info->start));
 	i = 1;
 	while (i < info->args[0])
 	{
@@ -101,6 +91,23 @@ int	start_philo(t_info *info, t_philo **philos)
 		}
 		i += 2;
 	}
+	return (0);
+}
+
+int	start_philo(t_info *info, t_philo **philos)
+{
+	if (init_philo(info, philos))
+		return (2);
+	info->data_died = crt_mutex();
+	if (info->data_died == 0)
+		return (2);
+	info->print_msg = crt_mutex();
+	if (info->print_msg == 0)
+		return (2);
+	info->died = 0;
+	time_start(&(info->start));
+	if (create_thread(info, philos))
+		return (1);
 	monitor(*philos, info);
 	return (0);
 }

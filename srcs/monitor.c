@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/17 16:54:47 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 21:53:32 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 static void	msg_philo_died(t_philo *philo, int time)
 {
 	pthread_mutex_lock(philo->info->print_msg);
-
 	pthread_mutex_lock(philo->info->data_died);
 	philo->info->died = 1;
 	pthread_mutex_unlock(philo->info->data_died);
-
 	printf("%d %d %s", time, philo->number, " has died\n");
 	pthread_mutex_unlock(philo->info->print_msg);
 }
