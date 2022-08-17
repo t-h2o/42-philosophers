@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/16 16:43:10 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:04:11 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,18 @@
 
 // Print a philopher message and set to 1 info.died
 // if one philospher has already died, do nothing
-static void	msg_philo_died(char *msg, t_philo *philo, int time)
+static void	msg_philo_died(t_philo *philo, int time)
 {
 	pthread_mutex_lock(philo->info->data_died);
-	if (philo->info->died == 1)
-	{
-		pthread_mutex_unlock(philo->info->data_died);
-		return ;
-	}
-	else
-	{
-		philo->info->died = 1;
-		pthread_mutex_unlock(philo->info->data_died);
-		pthread_mutex_lock(philo->info->print_msg);
-		putnbr_fd(time, 1);
-		putstr_fd(" ", 1);
-		putnbr_fd(philo->number, 1);
-		putstr_fd(msg, 1);
-		pthread_mutex_unlock(philo->info->print_msg);
-	}
+	philo->info->died = 1;
+	pthread_mutex_unlock(philo->info->data_died);
+
+	pthread_mutex_lock(philo->info->print_msg);
+	putnbr_fd(time, 1);
+	putstr_fd(" ", 1);
+	putnbr_fd(philo->number, 1);
+	putstr_fd(" has died\n", 1);
+	pthread_mutex_unlock(philo->info->print_msg);
 }
 
 // Check if a philopher had died with last_eat time and the time now
@@ -49,7 +42,7 @@ static int	check_dead(t_philo *philos)
 		if (now - philos[i].last_eat > philos[i].info->args[1])
 		{
 			pthread_mutex_unlock(philos[i].data_philo);
-			msg_philo_died(" has died\n", &(philos[i]), now);
+			msg_philo_died(&(philos[i]), now);
 			return (1);
 		}
 		pthread_mutex_unlock(philos[i].data_philo);
