@@ -6,7 +6,7 @@
 /*   By: nasackers <hack@nasa.usa4all>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:31:05 by nasackers         #+#    #+#             */
-/*   Updated: 2022/08/14 09:24:39 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/17 16:54:54 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // ?[4] : number of times each philosopher must eat
 // start:
 typedef struct s_info {
-	pthread_t		monitor[2];
+	pthread_t		monitor;
 	int				args[5];
 	int				died;
 	struct timeval	start;

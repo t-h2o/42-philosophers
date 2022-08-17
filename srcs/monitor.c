@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/17 16:50:44 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:54:47 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	*monitor_thread(void *args)
 // Start the thread monitor
 int	monitor(t_philo *philos, t_info *info)
 {
-	if (pthread_create(&(info->monitor[0]), 0, &monitor_thread, philos))
+	if (pthread_create(&(info->monitor), 0, &monitor_thread, philos))
 	{
 		print_error("Error: Philo: System: pthread_join\n");
 		return (1);
