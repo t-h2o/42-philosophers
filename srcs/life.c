@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/17 16:20:47 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:50:19 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	msg_philo(char *msg, t_philo *philo, int time)
 		pthread_mutex_unlock(philo->info->print_msg);
 		return ;
 	}
-	putnbr_fd(time, 1);
-	putstr_fd(" ", 1);
-	putnbr_fd(philo->number, 1);
-	putstr_fd(msg, 1);
+	printf("%d %d %s", time, philo->number, msg);
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 

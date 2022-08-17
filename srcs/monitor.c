@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/17 16:04:11 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:50:44 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 // if one philospher has already died, do nothing
 static void	msg_philo_died(t_philo *philo, int time)
 {
+	pthread_mutex_lock(philo->info->print_msg);
+
 	pthread_mutex_lock(philo->info->data_died);
 	philo->info->died = 1;
 	pthread_mutex_unlock(philo->info->data_died);
 
-	pthread_mutex_lock(philo->info->print_msg);
-	putnbr_fd(time, 1);
-	putstr_fd(" ", 1);
-	putnbr_fd(philo->number, 1);
-	putstr_fd(" has died\n", 1);
+	printf("%d %d %s", time, philo->number, " has died\n");
 	pthread_mutex_unlock(philo->info->print_msg);
 }
 
