@@ -25,7 +25,6 @@ endif
 
 
 CLIB	=	-lpthread
-#OFLAGS	=	-fsanitize=address
 
 
 #	Headers
@@ -67,11 +66,13 @@ vpath %.c $(SRCD)
 all : $(NAME)
 
 $(NAME):	$(OBJS)
+	@echo $(OFLAGS)
 	@echo Create the program from the objets...
 	@$(CC) $(OFLAGS) $(OBJS) $(CLIB) -o $(NAME)
 	@echo Done !
 
 $(OBJD)/%.o : %.c | $(OBJD)
+	@echo $(CFLAGS)
 	@echo Create the objets from the source code: $@...
 	@$(CC) $(CFLAGS) -I $(INCD) -o $@ -c $^
 

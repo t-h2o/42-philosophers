@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 00:37:36 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/17 16:44:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:01:43 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int	p_sleep(t_philo *philo)
 	begin = time_now(&(philo->info->start));
 	now = begin;
 	msg_philo(" is sleeping\n", philo, begin);
-	my_sleep(philo, philo->info->args[3]);
-	return (0);
+	return (my_sleep(philo, philo->info->args[3]));
 }

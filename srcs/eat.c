@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:47 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/15 16:44:08 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:15:35 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ static int	lock_fork(t_philo *philo)
 	if (philo->number % 2 == 1)
 	{
 		pthread_mutex_lock(philo->mine);
-		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		msg_philo(" has taken a fork mine\n", philo, time_now(&(philo->info->start)));
 		if (ifdead(philo) || philo->left == 0)
 			return (unlock(philo->mine, 0));
 		pthread_mutex_lock(philo->left);
-		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		msg_philo(" has taken a fork left\n", philo, time_now(&(philo->info->start)));
 		if (ifdead(philo))
 			return (unlock(philo->mine, philo->left));
 	}
 	else
 	{
 		pthread_mutex_lock(philo->left);
-		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		msg_philo(" has taken a fork left\n", philo, time_now(&(philo->info->start)));
 		if (ifdead(philo))
 			return (unlock(philo->left, 0));
 		pthread_mutex_lock(philo->mine);
-		msg_philo(" has taken a fork\n", philo, time_now(&(philo->info->start)));
+		msg_philo(" has taken a fork mine\n", philo, time_now(&(philo->info->start)));
 		if (ifdead(philo))
 			return (unlock(philo->left, philo->mine));
 	}
@@ -72,9 +72,12 @@ int	p_eat(t_philo *philo)
 	pthread_mutex_lock(philo->data_philo);
 	philo->last_eat = now;
 	pthread_mutex_unlock(philo->data_philo);
-	pthread_mutex_unlock(philo->info->print_msg);
 	msg_philo(" is eating\n", philo, now);
-	my_sleep(philo, philo->info->args[2]);
+	if (my_sleep(philo, philo->info->args[2]))
+	{
+		unlock(philo->mine, philo->left);
+		return (1);
+	}
 	unlock(philo->mine, philo->left);
 	return (0);
 }
