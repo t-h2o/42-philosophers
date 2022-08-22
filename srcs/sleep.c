@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 00:37:36 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/10 18:49:53 by melogr@phy       ###   ########.fr       */
+/*   Updated: 2022/08/22 13:10:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	p_sleep(t_philo *philo)
 		usleep(100);
 		now = time_now(&(philo->info->start));
 		if (ifdead(philo))
-			return (0);
+			return (1);
 	}
 	return (0);
 }
