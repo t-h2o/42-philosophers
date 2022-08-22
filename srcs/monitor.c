@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:09:50 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/08/16 16:43:10 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:31:10 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	check_finish(t_philo *philos)
 		}
 		pthread_mutex_unlock(philos[i].data_philo);
 	}
+	msg_philo_died(" COFFEE\n", philos, time_now(&(philos->info->start)));
 	return (1);
 }
 

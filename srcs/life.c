@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/16 16:52:17 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:23:02 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ void	*life(void *arg)
 
 	me = arg;
 	i = me->count;
-	while (i == -1 || i--)
+	while (1)
 	{
 		if (p_eat(me))
 			return (0);
-		p_sleep(me);
+		if (p_sleep(me))
+			return (0);
 		p_think(me);
+		if (i-- == 0)
+		{
+			pthread_mutex_lock(me->data_philo);
+			me->count = 0;
+			pthread_mutex_unlock(me->data_philo);
+		}
 	}
-	pthread_mutex_lock(me->data_philo);
-	me->count = 0;
-	pthread_mutex_unlock(me->data_philo);
 	return (0);
 }
