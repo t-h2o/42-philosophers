@@ -6,7 +6,7 @@
 /*   By: melogr@phy <tgrivel@student.42lausanne.ch  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:06:45 by melogr@phy        #+#    #+#             */
-/*   Updated: 2022/08/22 13:13:57 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/08/22 18:20:37 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	*life(void *arg)
 	{
 		if (p_eat(me))
 			return (0);
-		if (p_sleep(me))
-			return (0);
-		p_think(me);
-		if (i-- == 0)
+		if (--i == 0)
 		{
 			pthread_mutex_lock(me->data_philo);
 			me->count = 0;
 			pthread_mutex_unlock(me->data_philo);
 		}
+		if (p_sleep(me))
+			return (0);
+		p_think(me);
 	}
 	return (0);
 }
